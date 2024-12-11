@@ -1,0 +1,2047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>705</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow{ 
+background-color:#F0F0F0;}
+#Header, #MainBody{ 
+background-color:white;}
+#pushButton{
+background-color: transparent;
+color: white;
+text-aligin: center;
+}
+QPushButton{
+text-align:left;
+padding:3px 5px;
+border-top-left-radius:10px;
+border-bottom-left-radius:10px;}
+QLineEdit{
+background-color:#F0F0F0;
+padding:5px 10px;
+border-radius: 6px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>50</number>
+    </property>
+    <item alignment="Qt::AlignTop">
+     <widget class="QWidget" name="Header" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QFrame" name="LogoTopBar">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:#207BFF;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>44</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="Menu">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../resources/Navigation.png</normaloff>../resources/Navigation.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="Logotip">
+            <property name="font">
+             <font>
+              <family>Segoe UI Semibold</family>
+              <pointsize>16</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: white;</string>
+            </property>
+            <property name="text">
+             <string>MedSoft</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignRight">
+        <widget class="QFrame" name="TopBar">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="Name">
+            <property name="font">
+             <font>
+              <family>Segoe UI Semibold</family>
+              <pointsize>8</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:#474A51;</string>
+            </property>
+            <property name="text">
+             <string>Иванов Иван</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Person">
+            <property name="sizeIncrement">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../resources/Person.png</normaloff>../resources/Person.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Exit">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../resources/Exit.png</normaloff>../resources/Exit.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="MainBody" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>800</width>
+        <height>487</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="LeftMenu" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #207BFF;</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>20</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="LeftBar" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>467</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>7</number>
+             </property>
+             <property name="rightMargin">
+              <number>11</number>
+             </property>
+             <property name="bottomMargin">
+              <number>11</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="LeftBarUp">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_5">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="Report">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>9</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: white;
+background-color:#1E71EA;
+</string>
+                  </property>
+                  <property name="text">
+                   <string>Журнал учета</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/Magazine.png</normaloff>../resources/Magazine.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="Lab">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>9</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: transparent;
+color: white;</string>
+                  </property>
+                  <property name="text">
+                   <string>Лаборатория</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/Lab.png</normaloff>../resources/Lab.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="Statistics">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>9</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: transparent;
+color: white;</string>
+                  </property>
+                  <property name="text">
+                   <string>Статистика</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/Statistic.png</normaloff>../resources/Statistic.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QFrame" name="LeftBarDown">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="Help">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>9</pointsize>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: transparent;
+color: white;</string>
+                  </property>
+                  <property name="text">
+                   <string>Помощь</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/Help.png</normaloff>../resources/Help.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="Settings">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                    <pointsize>9</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: transparent;color: white;</string>
+                  </property>
+                  <property name="text">
+                   <string>Настройки</string>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/Settings.png</normaloff>../resources/Settings.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>16</width>
+                    <height>16</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="mainBodyContent" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QStackedWidget" name="stackedWidget">
+            <widget class="QWidget" name="ReportpagePatients">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QWidget" name="TablePatients" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_10">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="Label">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI Semibold</family>
+                     <pointsize>9</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color:#474A51;</string>
+                   </property>
+                   <property name="text">
+                    <string>Список пациентов</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item alignment="Qt::AlignRight">
+                  <widget class="QFrame" name="TopBarRight">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="Edit">
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset>
+                        <normaloff>../resources/edit.png</normaloff>../resources/edit.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>24</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="Delete">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset>
+                        <normaloff>../resources/Delete.png</normaloff>../resources/Delete.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>24</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item alignment="Qt::AlignLeft">
+                  <widget class="QFrame" name="TopBarLeft">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_11">
+                    <property name="spacing">
+                     <number>5</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>5</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>5</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>5</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>5</number>
+                    </property>
+                    <item alignment="Qt::AlignLeft">
+                     <widget class="QPushButton" name="Table1">
+                      <property name="font">
+                       <font>
+                        <family>Segoe UI Semibold</family>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color:#474A51;</string>
+                      </property>
+                      <property name="text">
+                       <string>Пациенты</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item alignment="Qt::AlignLeft">
+                     <widget class="QPushButton" name="Table2">
+                      <property name="font">
+                       <font>
+                        <family>Segoe UI Semibold</family>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color:#474A51;</string>
+                      </property>
+                      <property name="text">
+                       <string>Врачи</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item alignment="Qt::AlignHCenter">
+                     <widget class="QPushButton" name="Table3">
+                      <property name="font">
+                       <font>
+                        <family>Segoe UI Semibold</family>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color:#474A51;</string>
+                      </property>
+                      <property name="text">
+                       <string>Записи</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTableWidget" name="tableWidgetPatients">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius:12px;
+color: #474A51;</string>
+                   </property>
+                   <column>
+                    <property name="text">
+                     <string>ID</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>ФИО</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Дата рождения</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Адрес</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Пол</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Номер телефона</string>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semilight</family>
+                      <pointsize>7</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="foreground">
+                     <brush brushstyle="NoBrush">
+                      <color alpha="255">
+                       <red>71</red>
+                       <green>74</green>
+                       <blue>81</blue>
+                      </color>
+                     </brush>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="ReportpageDoc">
+             <property name="maximumSize">
+              <size>
+               <width>778</width>
+               <height>483</height>
+              </size>
+             </property>
+             <widget class="QWidget" name="TableDoctors" native="true">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>781</width>
+                <height>481</height>
+               </rect>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_14">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>10</number>
+               </property>
+               <property name="topMargin">
+                <number>10</number>
+               </property>
+               <property name="rightMargin">
+                <number>10</number>
+               </property>
+               <property name="bottomMargin">
+                <number>10</number>
+               </property>
+               <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                <widget class="QLabel" name="Label2">
+                 <property name="font">
+                  <font>
+                   <family>Segoe UI Semibold</family>
+                   <pointsize>9</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:#474A51;</string>
+                 </property>
+                 <property name="text">
+                  <string>Список врачей</string>
+                 </property>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignRight|Qt::AlignTop">
+                <widget class="QFrame" name="TopBarRight2">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_13">
+                  <item>
+                   <widget class="QPushButton" name="Edit2">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../resources/edit.png</normaloff>../resources/edit.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>24</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="Delete2">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../resources/Delete.png</normaloff>../resources/Delete.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>24</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                <widget class="QFrame" name="TopBarLeft2">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_12">
+                  <item>
+                   <widget class="QPushButton" name="Tab1">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Пациенты</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="Tab2">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Врачи</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="Tab3">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Записи</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableWidget" name="tableWidgetDoc">
+                 <property name="styleSheet">
+                  <string notr="true">border-radius:12px;
+color: #474A51;</string>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>ID</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>ФИО</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Должность</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="ReportpageAppointment">
+             <widget class="QWidget" name="widget" native="true">
+              <property name="geometry">
+               <rect>
+                <x>-1</x>
+                <y>-1</y>
+                <width>781</width>
+                <height>491</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_15">
+               <property name="spacing">
+                <number>5</number>
+               </property>
+               <property name="leftMargin">
+                <number>10</number>
+               </property>
+               <property name="topMargin">
+                <number>10</number>
+               </property>
+               <property name="rightMargin">
+                <number>10</number>
+               </property>
+               <property name="bottomMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="Label3">
+                 <property name="font">
+                  <font>
+                   <family>Segoe UI Semibold</family>
+                   <pointsize>9</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:#474A51;</string>
+                 </property>
+                 <property name="text">
+                  <string>Журнал учета записей</string>
+                 </property>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignRight">
+                <widget class="QFrame" name="TopBarRight3">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_15">
+                  <item alignment="Qt::AlignRight">
+                   <widget class="QPushButton" name="Edit3">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../resources/edit.png</normaloff>../resources/edit.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>24</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item alignment="Qt::AlignRight">
+                   <widget class="QPushButton" name="Delete3">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../resources/Delete.png</normaloff>../resources/Delete.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>24</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft">
+                <widget class="QFrame" name="TopBarLeft3">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_14">
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QPushButton" name="Bt1">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Пациенты</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QPushButton" name="Bt2">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Врачи</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QPushButton" name="Bt3">
+                    <property name="font">
+                     <font>
+                      <family>Segoe UI Semibold</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:#474A51;</string>
+                    </property>
+                    <property name="text">
+                     <string>Записи</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableWidget" name="tableWidgetAppointment">
+                 <property name="styleSheet">
+                  <string notr="true">border-radius:12px;
+color: #474A51;</string>
+                 </property>
+                 <column>
+                  <property name="text">
+                   <string>New Column</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>ID</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Пациент</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Врач</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Время</string>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semilight</family>
+                    <pointsize>7</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="foreground">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="255">
+                     <red>71</red>
+                     <green>74</green>
+                     <blue>84</blue>
+                    </color>
+                   </brush>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="Labpage">
+             <widget class="QLabel" name="LabName">
+              <property name="geometry">
+               <rect>
+                <x>310</x>
+                <y>210</y>
+                <width>131</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:#474A51;</string>
+              </property>
+              <property name="text">
+               <string>Лаборатория</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="Statisticpage">
+             <widget class="QLabel" name="StatisticName">
+              <property name="geometry">
+               <rect>
+                <x>330</x>
+                <y>210</y>
+                <width>101</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:#474A51;</string>
+              </property>
+              <property name="text">
+               <string>Статистика</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="Settingspage">
+             <widget class="QLabel" name="SettingsName">
+              <property name="geometry">
+               <rect>
+                <x>340</x>
+                <y>210</y>
+                <width>102</width>
+                <height>28</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:#474A51;</string>
+              </property>
+              <property name="text">
+               <string>Настройки</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="Helppage">
+             <widget class="QLabel" name="HelpName">
+              <property name="geometry">
+               <rect>
+                <x>340</x>
+                <y>220</y>
+                <width>82</width>
+                <height>28</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI Semibold</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:#474A51;</string>
+              </property>
+              <property name="text">
+               <string>Помощь</string>
+              </property>
+             </widget>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QWidget" name="RightMenuDoctors" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item alignment="Qt::AlignTop">
+           <widget class="QWidget" name="RightMenuWidgetDoctors" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item alignment="Qt::AlignLeft|Qt::AlignTop">
+              <widget class="QFrame" name="FromForDoctors">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_12">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>10</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>10</number>
+                </property>
+                <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                 <widget class="QFrame" name="TopBarButtonDoctors">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+                    <widget class="QPushButton" name="Doctors2">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color:#474A51;</string>
+                     </property>
+                     <property name="text">
+                      <string>Врачи</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+                    <widget class="QPushButton" name="Patients2">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color:#474A51;</string>
+                     </property>
+                     <property name="text">
+                      <string>Пациенты</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+                    <widget class="QPushButton" name="Dismiss2">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset>
+                       <normaloff>../resources/dismiss.png</normaloff>../resources/dismiss.png</iconset>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>12</width>
+                       <height>12</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="FIODoctors">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:#BABABA;</string>
+                  </property>
+                  <property name="inputMask">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>ФИО</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="Job">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:#BABABA;</string>
+                  </property>
+                  <property name="inputMask">
+                   <string/>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Должность</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+              <widget class="QPushButton" name="AddDoctors">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color:#207BFF;
+color:white;
+border-radius:6px;</string>
+               </property>
+               <property name="text">
+                <string>Добавить</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="RightMenu" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <property name="spacing">
+           <number>5</number>
+          </property>
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+           <widget class="QWidget" name="RightMenuWidget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item alignment="Qt::AlignLeft|Qt::AlignTop">
+              <widget class="QFrame" name="TopBarButton">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="Patients">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:#474A51;</string>
+                  </property>
+                  <property name="text">
+                   <string>Пациенты</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="Doctors">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI Semibold</family>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:#474A51;</string>
+                  </property>
+                  <property name="text">
+                   <string>Врачи</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+                 <widget class="QPushButton" name="Dismiss">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>../resources/dismiss.png</normaloff>../resources/dismiss.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>12</width>
+                    <height>12</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignHCenter">
+              <widget class="QFrame" name="FormForPatients">
+               <property name="minimumSize">
+                <size>
+                 <width>356</width>
+                 <height>203</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_9">
+                <property name="spacing">
+                 <number>10</number>
+                </property>
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>10</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="QLineEdit" name="FIO">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                   </font>
+                  </property>
+                  <property name="placeholderText">
+                   <string>ФИО</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="Birthday">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                   </font>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Дата рождения</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="Adres">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Адрес</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="Phone">
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                   </font>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Номер телефона</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft|Qt::AlignBottom">
+                 <widget class="QFrame" name="Gender">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>5</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>5</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>10</number>
+                   </property>
+                   <item>
+                    <widget class="QRadioButton" name="Women">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string>Ж</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="Man">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI Semibold</family>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string>М</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignHCenter">
+              <widget class="QPushButton" name="AddPatients">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color:#207BFF;
+color:white;
+border-radius:6px;</string>
+               </property>
+               <property name="text">
+                <string>Добавить</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="Footer" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="MyName">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#474A51;</string>
+         </property>
+         <property name="text">
+          <string>Daria Zamiralova 2024</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
