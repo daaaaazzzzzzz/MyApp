@@ -58,7 +58,7 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Подключаем UI основного окна
         self.ui.setupUi(self)  # Настраиваем UI для QMainWindow
 
-        self.canvas = FigureCanvas(plt.Figure(figsize=(10, 8)))
+        self.canvas = FigureCanvas(plt.Figure(figsize=(6, 6)))
         self.ui.verticalLayout_5.addWidget(self.canvas)  # Добавляем холст для диаграммы на форму
 
         # Создание заголовка для списка пациентов
@@ -169,8 +169,19 @@ class MyApp(QtWidgets.QMainWindow):
         connection.commit()  # Сохраняем изменения
         connection.close()  # Закрываем соединение
 
+    def execute_db_query(self, query, params=(), should_commit=False):
+        try:
+            connection = sqlite3.connect('db/hospital_management.db')
+            cursor = connection.cursor()
+            cursor.execute(query, params)
+            if should_commit:
+                connection.commit()
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", str(e))
+        finally:
+            connection.close()
+
     def add_patient(self):
-        # Получаем данные из полей ввода
         full_name = self.ui.FIO.text().strip()
         birthday = self.ui.Birthday.text().strip()
         address = self.ui.Adres.text().strip()
@@ -178,14 +189,8 @@ class MyApp(QtWidgets.QMainWindow):
         phone_number = self.ui.Phone.text().strip()
 
         if full_name:  # Проверка на пустое имя
-            connection = sqlite3.connect('db/hospital_management.db')
-            cursor = connection.cursor()
-            cursor.execute(
-                "INSERT INTO Patients (full_name, birthday, address, gender, phone_number) VALUES (?, ?, ?, ?, ?)",
-                (full_name, birthday, address, gender, phone_number))
-            connection.commit()
-            connection.close()
-
+            query = "INSERT INTO Patients (full_name, birthday, address, gender, phone_number) VALUES (?, ?, ?, ?, ?)"
+            self.execute_db_query(query, (full_name, birthday, address, gender, phone_number), should_commit=True)
             self.load_patients()  # Обновляем таблицу с пациентами
         else:
             QMessageBox.warning(self, "Ошибка", "Имя пациента не может быть пустым.")
@@ -208,85 +213,22 @@ class MyApp(QtWidgets.QMainWindow):
 
             # Показываем окно и получаем ответ
             if reply.exec_() == QMessageBox.Yes:
-                connection = sqlite3.connect('db/hospital_management.db')
-                cursor = connection.cursor()
-                cursor.execute("DELETE FROM Patients WHERE id = ?", (patient_id,))
-                connection.commit()
-                connection.close()
-
+                query = "DELETE FROM Patients WHERE id = ?"
+                self.execute_db_query(query, (patient_id,), should_commit=True)
                 self.load_patients()  # Обновляем таблицу
         else:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите пациента для удаления.")
 
-    def edit_patient(self):
-        row_index = self.ui.tableWidgetPatients.currentRow()
-        if row_index >= 0:
-            patient_id = self.ui.tableWidgetPatients.item(row_index, 0).text()  # Получаем ID пациента
-            full_name = self.ui.FIO.text()
-            birthday = self.ui.Birthday.text()
-            address = self.ui.Adres.text()
-            gender = 'М' if self.ui.Man.isChecked() else 'Ж'
-            phone_number = self.ui.Phone.text()
-            patient_data = self.get_patient_by_id(patient_id)  # Получаем данные пациента
-
-            connection = sqlite3.connect('db/hospital_management.db')
-            cursor = connection.cursor()
-            cursor.execute("""
-                UPDATE Patients 
-                SET full_name = ?, birthday = ?, address = ?, gender = ?, phone_number = ?
-                WHERE id = ?
-            """, (full_name, birthday, address,gender, phone_number, patient_id))
-            connection.commit()
-            connection.close()
-
-            self.load_patients()  # Обновляем таблицу
-
-            if patient_data:
-                # Обновляем поля ввода на основании полученных данных
-                self.ui.FIO.setText(patient_data[1])
-                self.ui.Birthday.setText(patient_data[2])
-                self.ui.Adres.setText(patient_data[3])
-                self.ui.Man.setChecked(patient_data[4] == 'М')
-                self.ui.Woman.setChecked(patient_data[4] == 'Ж')
-                self.ui.Phone.setText(patient_data[5])
-            else:
-                QMessageBox.warning(self, "Ошибка", "Пациент не найден.")
-        else:
-            QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите пациента для редактирования.")
-
-    def load_patients(self):
-        connection = sqlite3.connect('db/hospital_management.db')
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM Patients")
-        self.ui.tableWidgetPatients.setRowCount(0)
-        for row in cursor.fetchall():
-            row_position = self.ui.tableWidgetPatients.rowCount()
-            self.ui.tableWidgetPatients.insertRow(row_position)
-            for column, data in enumerate(row):
-                item = QtWidgets.QTableWidgetItem(str(data))
-                self.ui.tableWidgetPatients.setItem(row_position, column, item)
-
-                # Подключаем обработчик изменения ячейки
-                if column == 1:  # Изменение ФИО (например, или другой важный столбец)
-                    item.setFlags(QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
-
-        # Подключаем сигнал itemChanged ко всему виджету
-        self.ui.tableWidgetPatients.itemChanged.connect(
-            lambda item: self.update_patient_data(item.row(), item.column()))
-        connection.close()
-
     def add_doctor(self):
-        full_name = self.ui.FIODoctors.text()
-        job_title = self.ui.Job.text()
+        full_name = self.ui.FIODoctors.text().strip()
+        job_title = self.ui.Job.text().strip()
 
-        connection = sqlite3.connect('db/hospital_management.db')
-        cursor = connection.cursor()
-        cursor.execute("INSERT INTO Doctors (full_name, job_title) VALUES (?, ?)",
-                       (full_name, job_title))
-        connection.commit()
-        connection.close()
-
-        self.load_doctors()  # Обновляем таблицу врачей
+        if full_name:  # Проверка на пустое имя
+            query = "INSERT INTO Doctors (full_name, job_title) VALUES (?, ?)"
+            self.execute_db_query(query, (full_name, job_title), should_commit=True)
+            self.load_doctors()  # Обновляем таблицу врачей
+        else:
+            QMessageBox.warning(self, "Ошибка", "Имя врача не может быть пустым.")
 
     def delete_doctor(self):
         row_index = self.ui.tableWidgetDoc.currentRow()
@@ -306,51 +248,50 @@ class MyApp(QtWidgets.QMainWindow):
 
             # Показываем окно и получаем ответ
             if reply.exec_() == QMessageBox.Yes:
-                connection = sqlite3.connect('db/hospital_management.db')
-                cursor = connection.cursor()
-                cursor.execute("DELETE FROM Doctors WHERE id = ?", (doctor_id,))
-                connection.commit()
-                connection.close()
-
+                query = "DELETE FROM Doctors WHERE id = ?"
+                self.execute_db_query(query, (doctor_id,), should_commit=True)
                 self.load_doctors()  # Обновляем таблицу врачей
         else:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите врача для удаления.")
 
-    def edit_doctor(self):
-        row_index = self.ui.tableWidgetDoc.currentRow()
-        if row_index >= 0:
-            doctor_id = self.ui.tableWidgetDoc.item(row_index, 0).text()  # Получаем ID врача
-            full_name = self.ui.FIODoctors.text()
-            job_title = self.ui.Job.text()
-
+    def load_patients(self):
+        query = "SELECT * FROM Patients"
+        try:
             connection = sqlite3.connect('db/hospital_management.db')
             cursor = connection.cursor()
-            cursor.execute("""
-                UPDATE Doctors 
-                SET full_name = ?, job_title = ?
-                WHERE id = ?
-            """, (full_name, job_title, doctor_id))
-            connection.commit()
+            cursor.execute(query)
+            self.ui.tableWidgetPatients.setRowCount(0)
+            for row in cursor.fetchall():
+                row_position = self.ui.tableWidgetPatients.rowCount()
+                self.ui.tableWidgetPatients.insertRow(row_position)
+                for column, data in enumerate(row):
+                    item = QtWidgets.QTableWidgetItem(str(data))
+                    self.ui.tableWidgetPatients.setItem(row_position, column, item)
+
+                if column == 1:
+                    item.setFlags(QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", str(e))
+        finally:
             connection.close()
 
-            self.load_doctors()  # Обновляем таблицу
-        else:QMessageBox.warning(self, "Ошибка", "Пожалуйста, выберите врача для редактирования.")
-
     def load_doctors(self):
-        connection = sqlite3.connect('db/hospital_management.db')
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM Doctors")
-        self.ui.tableWidgetDoc.setRowCount(0)
-        for row in cursor.fetchall():
-            row_position = self.ui.tableWidgetDoc.rowCount()
-            self.ui.tableWidgetDoc.insertRow(row_position)
-            for column, data in enumerate(row):
-                item = QtWidgets.QTableWidgetItem(str(data))
-                self.ui.tableWidgetDoc.setItem(row_position, column, item)
-
-        # Подключаем сигнал itemChanged для обновления информации о врачах
-        self.ui.tableWidgetDoc.itemChanged.connect(lambda item: self.update_doctor_data(item.row(), item.column()))
-        connection.close()
+        query = "SELECT * FROM Doctors"
+        try:
+            connection = sqlite3.connect('db/hospital_management.db')
+            cursor = connection.cursor()
+            cursor.execute(query)
+            self.ui.tableWidgetDoc.setRowCount(0)
+            for row in cursor.fetchall():
+                row_position = self.ui.tableWidgetDoc.rowCount()
+                self.ui.tableWidgetDoc.insertRow(row_position)
+                for column, data in enumerate(row):
+                    item = QtWidgets.QTableWidgetItem(str(data))
+                    self.ui.tableWidgetDoc.setItem(row_position, column, item)
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", str(e))
+        finally:
+            connection.close()
 
     def add_appointment(self):
         """Добавляет новую запись в таблицу записей."""
@@ -506,22 +447,23 @@ class MyApp(QtWidgets.QMainWindow):
                 doctor_id = self.get_doctor_id(doctor_name) if hasattr(self, 'get_doctor_id') else None
 
                 if patient_id and doctor_id and appointment_date and date_of_application and status:
-                    # Проверяем, существует ли уже запись с таким же пациентом, врачом и датами
-                    cursor.execute("""
-                        SELECT COUNT(*) FROM Appointments 
-                        WHERE patient_id = ? AND doctor_id = ? 
-                        AND appointment_date = ? AND date_of_application = ? AND status = ?
-                    """, (patient_id, doctor_id, appointment_date, date_of_application, status))
-                    count = cursor.fetchone()[0]
+                    # Проверяем, существует ли уже запись с таким же ID
+                    cursor.execute("SELECT COUNT(*) FROM Appointments WHERE id = ?", (appointment_id,))
+                    exists = cursor.fetchone()[0]
 
-                    if count == 0:  # Если записей нет, добавляем новую
+                    if exists == 0:  # Если запись не существует, добавляем новую
                         cursor.execute("""
-                                    INSERT INTO Appointments (patient_id, doctor_id, appointment_date, date_of_application, status) 
-                                    VALUES (?, ?, ?, ?, ?)
-                                """, (patient_id, doctor_id, appointment_date, date_of_application, status))
+                            INSERT INTO Appointments (patient_id, doctor_id, appointment_date, date_of_application, status) 
+                            VALUES (?, ?, ?, ?, ?)
+                        """, (patient_id, doctor_id, appointment_date, date_of_application, status))
                     else:
-                        QMessageBox.warning(self, "Ошибка",
-                                            f"Запись для пациента '{patient_name}' и врача '{doctor_name}' на данную дату уже существует.")
+                        # Если запись уже существует, то исправляем её
+                        cursor.execute("""
+                            UPDATE Appointments 
+                            SET patient_id = ?, doctor_id = ?, appointment_date = ?, date_of_application = ?, status = ?
+                            WHERE id = ?
+                        """, (patient_id, doctor_id, appointment_date, date_of_application, status, appointment_id))
+
                 else:
                     QMessageBox.warning(self, "Ошибка",
                                         f"Запись {row + 1} содержит пустые поля. Пожалуйста, проверьте данные.")
@@ -529,8 +471,7 @@ class MyApp(QtWidgets.QMainWindow):
             connection.commit()
             self.load_appointments()
             self.load_patient_statistics()
-            QMessageBox.information(self, "Информация",
-                                    "Данные о надежности пациентов обновлены.")
+            QMessageBox.information(self, "Информация", "Данные о надежности пациентов обновлены.")
         except sqlite3.Error as e:
             QMessageBox.critical(self, "Ошибка базы данных", f"Произошла ошибка при сохранении: {e}")
         except Exception as e:
@@ -591,47 +532,55 @@ class MyApp(QtWidgets.QMainWindow):
 
     def plot_patient_statistics(self):
         """Функция для построения круговой диаграммы посещаемости пациентов."""
+        # Получим количество посещавших и не посещавших пациентов
+        visited_count = self.get_visited_count()
+        no_show_count = self.get_no_show_count()
+
+        sizes = [visited_count, no_show_count]
         labels = ['Посетили', 'Не посетили']
         colors = ['#207BFF', '#66b3ff']
-
-        # Настройки текста для секторов диаграммы
-        font_properties = fm.FontProperties(family='Segoe UI', size=10, weight='normal')
-        textprops = {
-            'color': '#474A51',  # цвет для меток секторов
-            'fontproperties': font_properties
-        }
-
-        sizes = [self.get_visited_count(), self.get_no_show_count()]
         explode = (0.1, 0)  # Выделение сектора "Посетили"
 
-        # Построение диаграммы
-        ax = self.canvas.figure.add_subplot(111)
-        ax.clear()  # Очищаем оси
-        self.canvas.figure.set_size_inches(10, 8)
+        # Проверка на наличие данных
+        ax = self.canvas.figure.get_axes()  # Получаем существующий Axes
+        if len(ax) == 0:  # Если нет Axes, создаем новый
+            ax = self.canvas.figure.add_subplot(111)
+        else:
+            ax = ax[0]  # Берем уже существующий Axes
 
-        title_font_properties = fm.FontProperties(family='Segoe UI', size=14, weight='bold')
-        ax.set_title('Статистика посещаемости пациентов', color='#474A51', fontproperties=title_font_properties)
+        ax.clear()  # Очищаем старые данные на графике
 
-        # Функция для задания цвета текста процентов
-        def custom_autopct(pct):
-            return f'{pct:.1f}%'  # Форматирование текста процентов
+        if visited_count == 0 and no_show_count == 0:  # Если все размеры равны 0
+            ax.set_title('Статистика посещаемости пациентов', color='#474A51',
+                         fontproperties=fm.FontProperties(family='Segoe UI', size=14, weight='bold'))
+            ax.text(0.5, 0.5, 'Нет доступных данных', horizontalalignment='center', verticalalignment='center',
+                    fontsize=12)
+            ax.axis('off')  # Убираем оси
+        else:
+            # Удаление нулевых значений для корректного построения графика
+            sizes = [size if size > 0 else 0.01 for size in sizes]  # Заменяем 0 на минимальное значение
+            labels = [label if size > 0 else None for label, size in zip(labels, sizes)]  # Убираем метки для нуля
 
-        # Построение круговой диаграммы с цветами для процентов
-        wedges, texts, autotexts = ax.pie(
-            sizes,
-            explode=explode,
-            labels=labels,
-            autopct=custom_autopct,  # Вызов функции для процентов
-            startangle=90,
-            colors=colors,
-            textprops=textprops
-        )
+            ax.set_title('Статистика посещаемости пациентов', color='#474A51',
+                         fontproperties=fm.FontProperties(family='Segoe UI', size=14, weight='bold'))
 
-        # Установка цвета для текстов процентов
-        for autotext in autotexts:
-            autotext.set_color('#ffffff')  # Цвет текста процентов
-            autotext.set_fontsize(12)  # Установка размера шрифта
-            autotext.set_fontweight('bold')  # Установка жирного начертания шрифта
+            # Построение круговой диаграммы
+            wedges, texts, autotexts = ax.pie(
+                sizes,
+                explode=explode,
+                labels=labels,
+                autopct=lambda pct: f'{pct:.1f}%',  # Форматирование текста процентов
+                startangle=90,
+                colors=colors,
+                textprops={'color': '#474A51'}  # Цвет текста
+            )
+
+            # Установка цвета для текстов процентов
+            for autotext in autotexts:
+                if autotext.get_text() != '0%':  # Установите цвет только для ненулевых значений
+                    autotext.set_color('#ffffff')  # Цвет текста процентов
+                    autotext.set_fontsize(12)  # Установка размера шрифта
+                    autotext.set_fontweight('bold')
 
         ax.axis('equal')  # Сохраняем круговую форму
         self.canvas.draw()  # Обновляем график
