@@ -1,11 +1,14 @@
 import os
 import sys
 import sqlite3
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 
 from docx import Document
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QLabel, QMessageBox
 from PyQt5.QtGui import QFont
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from MainWindow import Ui_MainWindow  # Импорт интерфейса основного окна
 from Login import Ui_Login  # Импорт интерфейса логина
@@ -55,6 +58,23 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Подключаем UI основного окна
         self.ui.setupUi(self)  # Настраиваем UI для QMainWindow
 
+        self.canvas = FigureCanvas(plt.Figure(figsize=(10, 8)))
+        self.ui.verticalLayout_5.addWidget(self.canvas)  # Добавляем холст для диаграммы на форму
+
+        # Создание заголовка для списка пациентов
+        self.patient_list_title = QtWidgets.QLabel("Список пациентов и их надежность:")  # Заголовок для списка
+        font = QtGui.QFont("Segoe UI", 10, QtGui.QFont.Bold)
+        self.patient_list_title.setStyleSheet("color: #474A51;")
+        self.patient_list_title.setFont(font)  # Устанавливаем шрифт для заголовка
+        self.ui.verticalLayout_5.addWidget(self.patient_list_title)  # Добавляем заголовок в layout
+
+        # Создание списка пациентов под заголовком
+        self.patient_list_widget = QtWidgets.QListWidget()  # Создаем QListWidget для списка пациентов
+        self.patient_list_widget.setFrameShape(QtWidgets.QFrame.NoFrame)  # Убираем рамку
+        self.patient_list_widget.setFont(QtGui.QFont("Segoe UI", 9))  # Устанавливаем шрифт для списка
+        self.patient_list_widget.setStyleSheet("QListWidget { color: #474A51; }")
+        self.ui.verticalLayout_5.addWidget(self.patient_list_widget)  # Добавляем список в layout
+
         self.create_database()
         # Разрешаем изменение размера окна и показываем кнопки сворачивания/развертывания
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowMinMaxButtonsHint | QtCore.Qt.WindowCloseButtonHint)
@@ -100,8 +120,6 @@ class MyApp(QtWidgets.QMainWindow):
         self.ui.Dismiss2.clicked.connect(self.hide_right_menu_doctors)
         self.ui.Menu.clicked.connect(self.hideShowLeftBar)
         self.ui.searchLineEdit.returnPressed.connect(self.highlight_patient)
-
-        self.ui.stackedWidget.setCurrentWidget(self.ui.Statisticpage)
 
         self.load_patients()
         self.load_doctors()
@@ -467,7 +485,7 @@ class MyApp(QtWidgets.QMainWindow):
             for column, data in enumerate(row):
                 self.ui.tableWidgetAppointment.setItem(row_position, column, QtWidgets.QTableWidgetItem(str(data)))
         connection.close()
-        self.save_appointments_to_word()  # Если нужно будет вызывать при загрузке или по нажатию кнопки
+        self.save_appointments_to_word()
 
     def save_appointments(self):
         """Сохраняет все записи из таблицы в базу данных."""
@@ -524,7 +542,6 @@ class MyApp(QtWidgets.QMainWindow):
     def get_patient_id(self, patient_name):
         connection = sqlite3.connect('db/hospital_management.db')
         cursor = connection.cursor()
-        # Изменяем 'name' на 'full_name'
         cursor.execute("SELECT id FROM Patients WHERE full_name = ?", (patient_name,))
         result = cursor.fetchone()
         connection.close()
@@ -533,7 +550,6 @@ class MyApp(QtWidgets.QMainWindow):
     def get_doctor_id(self, doctor_name):
         connection = sqlite3.connect('db/hospital_management.db')
         cursor = connection.cursor()
-        # Изменяем 'name' на 'full_name'
         cursor.execute("SELECT id FROM Doctors WHERE full_name = ?", (doctor_name,))
         result = cursor.fetchone()
         connection.close()
@@ -570,17 +586,97 @@ class MyApp(QtWidgets.QMainWindow):
     def load_patient_statistics(self):
         """Загружает данные о надежности пациентов и отображает в текстовом формате на странице статистики."""
         reliability_data = self.calculate_patient_reliability()
+        self.plot_patient_statistics()
+        self.populate_patient_list(reliability_data)
 
-        # Создаем строку для отображения данных о надежности
-        reliability_text = "<b>Надежность пациентов:</b><br>"  # Используем <br> для переноса строки
+    def plot_patient_statistics(self):
+        """Функция для построения круговой диаграммы посещаемости пациентов."""
+        labels = ['Посетили', 'Не посетили']
+        colors = ['#207BFF', '#66b3ff']
 
+        # Настройки текста для секторов диаграммы
+        font_properties = fm.FontProperties(family='Segoe UI', size=10, weight='normal')
+        textprops = {
+            'color': '#474A51',  # цвет для меток секторов
+            'fontproperties': font_properties
+        }
+
+        sizes = [self.get_visited_count(), self.get_no_show_count()]
+        explode = (0.1, 0)  # Выделение сектора "Посетили"
+
+        # Построение диаграммы
+        ax = self.canvas.figure.add_subplot(111)
+        ax.clear()  # Очищаем оси
+        self.canvas.figure.set_size_inches(10, 8)
+
+        title_font_properties = fm.FontProperties(family='Segoe UI', size=14, weight='bold')
+        ax.set_title('Статистика посещаемости пациентов', color='#474A51', fontproperties=title_font_properties)
+
+        # Функция для задания цвета текста процентов
+        def custom_autopct(pct):
+            return f'{pct:.1f}%'  # Форматирование текста процентов
+
+        # Построение круговой диаграммы с цветами для процентов
+        wedges, texts, autotexts = ax.pie(
+            sizes,
+            explode=explode,
+            labels=labels,
+            autopct=custom_autopct,  # Вызов функции для процентов
+            startangle=90,
+            colors=colors,
+            textprops=textprops
+        )
+
+        # Установка цвета для текстов процентов
+        for autotext in autotexts:
+            autotext.set_color('#ffffff')  # Цвет текста процентов
+            autotext.set_fontsize(12)  # Установка размера шрифта
+            autotext.set_fontweight('bold')  # Установка жирного начертания шрифта
+
+        ax.axis('equal')  # Сохраняем круговую форму
+        self.canvas.draw()  # Обновляем график
+
+    def populate_patient_list(self, reliability_data):
+        """Заполняет список пациентов данными о надежности."""
+        self.patient_list_widget.clear()  # Очищаем существующий список
         for full_name, reliability in reliability_data:
-            # Форматируем строки, чтобы ФИО занимало 30 символов, а процент 10 символов,
-            # и добавляем жирный шрифт для процента
-            reliability_text += f"{full_name:<30}: {reliability:.2f}%<br>"
+            self.patient_list_widget.addItem(f"{full_name}: {reliability:.2f}%")  # Добавляем элемент в список
 
-        self.ui.StatisticName.setText(reliability_text)  # Устанавливаем текст для QLabel Status
-        self.ui.StatisticName.setTextFormat(QtCore.Qt.RichText)  # Устанавливаем формат текста как RichText
+    def get_visited_count(self):
+        """Возвращает количество пациентов, которые пришли на прием."""
+        connection = sqlite3.connect('db/hospital_management.db')
+        cursor = connection.cursor()
+
+        # SQL-запрос для подсчета числа пациентов, которые пришли на прием
+        cursor.execute("""
+            SELECT COUNT(DISTINCT patient_id) 
+            FROM Appointments 
+            WHERE status = 'Пришел'
+        """)
+
+        visited_count = cursor.fetchone()[0]  # Извлекаем число
+        connection.close()
+        return visited_count if visited_count else 0
+
+    def get_no_show_count(self):
+        """Возвращает количество пациентов, которые не пришли на прием."""
+        connection = sqlite3.connect('db/hospital_management.db')
+        cursor = connection.cursor()
+
+        # Общее количество пациентов
+        cursor.execute("""
+            SELECT COUNT(DISTINCT patient_id) 
+            FROM Appointments
+        """)
+        total_patients = cursor.fetchone()[0]  # Извлекаем число
+
+        # Количество тех, кто пришел
+        visited_count = self.get_visited_count()
+
+        # Количество не пришедших
+        no_show_count = total_patients - visited_count if total_patients else 0
+        connection.close()
+        return no_show_count
 
     def update_patient_data(self, row, column):
         """Обновляет данные пациента в базе данных при изменении значений в таблице."""
